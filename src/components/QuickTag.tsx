@@ -16,10 +16,10 @@ export default function QuickTag({
           key={tag}
           type="button"
           onClick={() => onSelect(tag)}
-          className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+          className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-all active:scale-95 ${
             selected === tag
-              ? "bg-green-primary text-white"
-              : "bg-green-pale text-text-primary border border-green-light/50 hover:border-green-primary"
+              ? "bg-primary text-white shadow-sm"
+              : "bg-dark/5 text-text-secondary hover:bg-dark/10 border border-dark/5"
           }`}
         >
           {tag}

@@ -14,49 +14,42 @@ export default function SetupModal({ onStart }: Props) {
 
   const handleStart = () => {
     const w = parseFloat(weight);
-    if (!w || w <= 0) {
-      setError("请输入有效体重");
-      return;
-    }
-    if (!date) {
-      setError("请选择开始日期");
-      return;
-    }
+    if (!w || w <= 0) { setError("请输入有效体重"); return; }
+    if (!date) { setError("请选择开始日期"); return; }
     onStart(date, w);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30 backdrop-blur-sm animate-in">
-      <div className="w-full max-w-lg bg-card-bg rounded-t-3xl sm:rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl animate-in slide-in-from-bottom duration-300">
-        {/* Welcome */}
-        <div className="text-center space-y-2">
-          <div className="text-3xl mb-1">🌿</div>
-          <h2 className="text-xl font-bold text-text-primary">
-            欢迎来到三伏天备战计划
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-dark/60 backdrop-blur-sm">
+      <div className="w-full max-w-lg bg-card-bg rounded-t-3xl sm:rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl animate-slide-up">
+        {/* Emblem */}
+        <div className="text-center space-y-3">
+          <div className="text-5xl">🔥</div>
+          <h2 className="text-xl font-extrabold text-dark tracking-tight">
+            三伏天备战计划
           </h2>
-          <p className="text-sm text-text-secondary">
-            40天，记录每一天的改变
-          </p>
+          <div className="inline-block bg-dark text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider">
+            40 DAY CHALLENGE
+          </div>
         </div>
 
-        {/* Form */}
         <div className="space-y-4">
           {/* Date */}
           <div>
-            <label className="text-xs text-text-secondary mb-1.5 block">
+            <label className="text-xs font-bold text-text-secondary uppercase tracking-wider mb-1.5 block">
               开始日期
             </label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-cream border border-border rounded-xl px-4 py-3 text-sm text-text-primary focus:outline-none focus:border-green-primary transition-colors"
+              className="w-full bg-base border-2 border-dark/10 rounded-xl px-4 py-3.5 text-sm font-medium text-dark focus:outline-none focus:border-primary transition-colors"
             />
           </div>
 
           {/* Weight */}
           <div>
-            <label className="text-xs text-text-secondary mb-1.5 block">
+            <label className="text-xs font-bold text-text-secondary uppercase tracking-wider mb-1.5 block">
               初始体重
             </label>
             <div className="flex items-center gap-2">
@@ -66,37 +59,19 @@ export default function SetupModal({ onStart }: Props) {
                 step="0.1"
                 placeholder="130"
                 value={weight}
-                onChange={(e) => {
-                  setWeight(e.target.value);
-                  setError("");
-                }}
-                className="flex-1 bg-cream border border-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-green-primary transition-colors"
+                onChange={(e) => { setWeight(e.target.value); setError(""); }}
+                className="flex-1 bg-base border-2 border-dark/10 rounded-xl px-4 py-3.5 text-lg font-bold text-dark placeholder:text-text-muted focus:outline-none focus:border-primary transition-colors"
               />
-              <span className="text-sm text-text-muted flex-shrink-0">kg</span>
+              <span className="text-sm font-bold text-text-secondary flex-shrink-0">KG</span>
             </div>
           </div>
 
-          {/* Error */}
-          {error && (
-            <p className="text-xs text-red-500 text-center">{error}</p>
-          )}
+          {error && <p className="text-xs text-primary font-medium text-center">{error}</p>}
         </div>
 
-        {/* Challenge info */}
-        <div className="rounded-xl bg-green-pale px-4 py-3 flex items-center gap-2">
-          <span className="text-lg">🎯</span>
-          <div>
-            <p className="text-xs font-medium text-green-primary">40天挑战</p>
-            <p className="text-[10px] text-text-secondary">
-              每天喝水 · 运动 · 记录 · 早睡
-            </p>
-          </div>
-        </div>
-
-        {/* CTA */}
         <button
           onClick={handleStart}
-          className="w-full py-3.5 rounded-2xl bg-green-primary text-white font-medium text-base shadow-sm hover:bg-green-primary/90 active:scale-[0.98] transition-all"
+          className="w-full py-4 rounded-2xl bg-primary text-white font-bold text-base shadow-lg shadow-primary/25 hover:bg-primary-dark active:scale-[0.98] transition-all tracking-wide"
         >
           开始挑战
         </button>

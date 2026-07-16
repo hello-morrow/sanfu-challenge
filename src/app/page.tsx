@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRecords } from "@/hooks/useRecords";
 import { WATER_GOAL } from "@/lib/constants";
 import SetupModal from "@/components/SetupModal";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function Dashboard() {
   const { data, todayRecord, completionRate, currentDay, weightChange, setStartInfo } =
@@ -15,157 +16,150 @@ export default function Dashboard() {
 
   const waterDone = (todayRecord?.water ?? 0) >= WATER_GOAL;
   const exerciseDone = !!todayRecord?.exercise;
-  const foodDone = !!(
-    todayRecord?.breakfast ||
-    todayRecord?.lunch ||
-    todayRecord?.dinner
-  );
+  const foodDone = !!(todayRecord?.breakfast || todayRecord?.lunch || todayRecord?.dinner);
   const sleepDone = !!todayRecord?.sleep;
 
-  const reminders = [
-    { label: "喝水 2000ml", done: waterDone, icon: "💧" },
-    { label: "完成运动", done: exerciseDone, icon: "🏃" },
-    { label: "记录饮食", done: foodDone, icon: "🥗" },
-    { label: "早点睡觉", done: sleepDone, icon: "😴" },
+  const challenges = [
+    { label: "喝水 2000ml", done: waterDone },
+    { label: "完成运动", done: exerciseDone },
+    { label: "记录饮食", done: foodDone },
+    { label: "早点睡觉", done: sleepDone },
   ];
 
   const change = weightChange();
   const needsSetup = !data.startDate;
+  const challengesDone = challenges.filter((c) => c.done).length;
 
   return (
-    <div className="space-y-5 animate-in">
-      {/* Setup Modal - first visit only */}
-      {needsSetup && (
-        <SetupModal
-          onStart={(date, weight) => setStartInfo(date, weight)}
-        />
-      )}
+    <div className="space-y-5 animate-slide-up">
+      {needsSetup && <SetupModal onStart={(d, w) => setStartInfo(d, w)} />}
 
-      {/* Header */}
-      <div className="text-center space-y-1">
-        <h1 className="text-lg font-bold tracking-wide text-text-primary">
+      {/* DAY Counter */}
+      <div className="text-center space-y-2">
+        <div className="inline-flex items-center gap-2 bg-dark text-white px-5 py-2 rounded-full">
+          <span className="text-2xl">🔥</span>
+          <span className="text-sm font-bold tracking-widest">
+            DAY {day > 0 ? String(day).padStart(2, "0") : "00"} / 40
+          </span>
+        </div>
+        <h1 className="text-base font-extrabold text-dark tracking-tight">
           三伏天备战计划
         </h1>
-        <p className="text-xs text-text-muted">
-          Day {day > 0 ? day : "?"} / 40
-        </p>
       </div>
 
       {needsSetup && (
         <div className="text-center py-12">
-          <p className="text-sm text-text-muted">设置你的挑战目标后开始</p>
+          <p className="text-sm text-text-secondary font-medium">设置挑战目标后开始</p>
         </div>
       )}
 
       {!needsSetup && (
         <>
-          {/* Completion + Weight in one row */}
-          <div className="grid grid-cols-2 gap-3">
-            {/* Completion Rate */}
-            <div className="rounded-2xl bg-card-bg border border-border p-4 flex flex-col items-center justify-center">
-              <div className="relative w-20 h-20">
-                <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                  <circle
-                    cx="50" cy="50" r="38"
-                    fill="none" stroke="#E8F5E9" strokeWidth="7"
-                  />
-                  <circle
-                    cx="50" cy="50" r="38"
-                    fill="none" stroke="#7CB342" strokeWidth="7"
-                    strokeLinecap="round"
-                    strokeDasharray={`${rate * 2.39} 239`}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-lg font-bold text-green-primary">{rate}%</span>
-                  <span className="text-[9px] text-text-muted">完成度</span>
-                </div>
+          {/* Progress Card */}
+          <div className="rounded-3xl bg-card-bg border-2 border-dark/5 p-6 space-y-4 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">
+                  挑战完成度
+                </p>
+                <p className="text-4xl font-black text-dark mt-1">
+                  {rate}
+                  <span className="text-lg text-text-muted">%</span>
+                </p>
+              </div>
+              <div className="text-5xl animate-burn">
+                {rate >= 80 ? "🔥" : rate >= 50 ? "⚡" : rate > 0 ? "💪" : "🎯"}
               </div>
             </div>
+            <ProgressBar value={rate} max={100} />
+          </div>
 
-            {/* Weight Card */}
-            <div className="rounded-2xl bg-card-bg border border-border p-4 flex flex-col justify-center">
+          {/* Weight + Today Done in row */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-2xl bg-card-bg border-2 border-dark/5 p-4">
+              <p className="text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">
+                当前体重
+              </p>
               {todayRecord?.weight ? (
                 <>
-                  <span className="text-[10px] text-text-muted">当前体重</span>
-                  <span className="text-2xl font-bold text-text-primary mt-0.5">
+                  <p className="text-3xl font-black text-dark">
                     {todayRecord.weight}
                     <span className="text-xs font-normal text-text-muted ml-0.5">kg</span>
-                  </span>
+                  </p>
                   {change !== null && (
-                    <span className="text-[11px] text-green-primary mt-1">
-                      {change <= 0 ? `${change.toFixed(1)} kg` : `+${change.toFixed(1)} kg`}
-                    </span>
+                    <p className="text-xs font-bold text-primary mt-1">
+                      {change <= 0 ? `↓ ${Math.abs(change).toFixed(1)}` : `↑ ${change.toFixed(1)}`} kg
+                    </p>
                   )}
                 </>
               ) : (
-                <div className="text-center">
-                  <span className="text-[10px] text-text-muted block">当前体重</span>
-                  <span className="text-sm text-text-muted mt-1">-- kg</span>
-                </div>
+                <p className="text-lg font-bold text-text-muted">-- kg</p>
               )}
+            </div>
+
+            <div className="rounded-2xl bg-card-bg border-2 border-dark/5 p-4">
+              <p className="text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">
+                今日挑战
+              </p>
+              <p className="text-3xl font-black text-dark">
+                {challengesDone}<span className="text-lg text-text-muted">/4</span>
+              </p>
+              <p className="text-xs font-bold text-primary mt-1">
+                {challengesDone === 4 ? "完成 ✓" : "进行中"}
+              </p>
             </div>
           </div>
 
-          {/* Today's Reminders — the only checklist card */}
-          <div className="rounded-2xl bg-card-bg border border-border p-4">
-            <h3 className="text-sm font-medium text-text-secondary mb-3">
-              📋 今日提醒
+          {/* Challenge Checklist */}
+          <div className="rounded-2xl bg-card-bg border-2 border-dark/5 p-4 space-y-3">
+            <h3 className="text-xs font-bold text-text-secondary uppercase tracking-wider">
+              ⚡ 今日挑战任务
             </h3>
-            <div className="space-y-2.5">
-              {reminders.map((item) => (
+            <div className="space-y-2">
+              {challenges.map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center gap-3 text-sm"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
+                    item.done ? "bg-primary/5" : "bg-dark/3"
+                  }`}
                 >
                   <span
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                    className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 text-xs font-bold ${
                       item.done
-                        ? "bg-green-primary border-green-primary text-white"
-                        : "border-border"
+                        ? "bg-primary text-white"
+                        : "bg-dark/10 text-text-muted"
                     }`}
                   >
-                    {item.done && (
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                        <path d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
+                    {item.done ? "✓" : "○"}
                   </span>
-                  <span className="mr-auto">
-                    {item.done ? (
-                      <span className="text-text-muted line-through">{item.label}</span>
-                    ) : (
-                      <span className="text-text-primary">{item.label}</span>
-                    )}
+                  <span className={`text-sm font-medium flex-1 ${
+                    item.done ? "text-text-muted line-through" : "text-dark"
+                  }`}>
+                    {item.label}
                   </span>
-                  <span className="text-xs">{item.icon}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Today's note preview */}
+          {/* Note */}
           {todayRecord?.note && (
-            <div className="rounded-2xl bg-card-bg border border-border p-4">
-              <div className="flex items-start gap-2">
-                <span className="text-sm">📝</span>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  {todayRecord.note}
-                </p>
-              </div>
+            <div className="rounded-2xl bg-accent-light border-2 border-accent/20 p-4">
+              <p className="text-xs font-bold text-dark/60 mb-1">📝 今日备注</p>
+              <p className="text-sm text-dark/80">{todayRecord.note}</p>
             </div>
           )}
 
           {/* CTA */}
           <Link
             href="/today"
-            className={`block w-full text-center py-3.5 rounded-2xl font-medium transition-all ${
+            className={`block w-full text-center py-4 rounded-2xl font-extrabold text-base tracking-wide transition-all active:scale-[0.98] ${
               completed
-                ? "bg-green-pale text-green-primary"
-                : "bg-green-primary text-white shadow-sm"
+                ? "bg-dark/5 text-text-secondary"
+                : "bg-primary text-white shadow-lg shadow-primary/25"
             }`}
           >
-            {completed ? "已完成今日打卡 ✓" : "开始今日打卡"}
+            {completed ? "✓ 今日已完成" : "⚡ 开始今日打卡"}
           </Link>
         </>
       )}
