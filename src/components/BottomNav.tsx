@@ -26,7 +26,7 @@ export default function BottomNav() {
               className={`flex flex-col items-center gap-0.5 px-2 py-1 transition-colors min-w-0 ${
                 active
                   ? "text-primary"
-                  : "text-white/40 hover:text-white/70"
+                  : "text-white/70 hover:text-white"
               }`}
             >
               <item.icon active={active} />
@@ -42,7 +42,7 @@ export default function BottomNav() {
 function HomeIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.4)"}
+      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.7)"}
       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 12l9-9 9 9" />
       <path d="M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10" />
@@ -53,7 +53,7 @@ function HomeIcon({ active }: { active: boolean }) {
 function CheckIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.4)"}
+      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.7)"}
       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="10" />
       <path d="M9 12l2 2 4-4" />
@@ -64,14 +64,14 @@ function CheckIcon({ active }: { active: boolean }) {
 function ListIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.4)"}
+      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.7)"}
       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <line x1="8" y1="6" x2="21" y2="6" />
       <line x1="8" y1="12" x2="21" y2="12" />
       <line x1="8" y1="18" x2="21" y2="18" />
-      <circle cx="4" cy="6" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.4)"} stroke="none" />
-      <circle cx="4" cy="12" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.4)"} stroke="none" />
-      <circle cx="4" cy="18" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.4)"} stroke="none" />
+      <circle cx="4" cy="6" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.7)"} stroke="none" />
+      <circle cx="4" cy="12" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.7)"} stroke="none" />
+      <circle cx="4" cy="18" r="1.5" fill={active ? "#FF6B35" : "rgba(255,255,255,0.7)"} stroke="none" />
     </svg>
   );
 }
@@ -79,7 +79,7 @@ function ListIcon({ active }: { active: boolean }) {
 function ChartIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.4)"}
+      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.7)"}
       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
     </svg>
@@ -89,7 +89,7 @@ function ChartIcon({ active }: { active: boolean }) {
 function CalendarIcon({ active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.4)"}
+      stroke={active ? "#FF6B35" : "rgba(255,255,255,0.7)"}
       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="2" />
       <line x1="16" y1="2" x2="16" y2="6" />
