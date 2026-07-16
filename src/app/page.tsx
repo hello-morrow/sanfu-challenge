@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-5 animate-slide-up">
-      {needsSetup && <SetupModal onStart={(d, w) => setStartInfo(d, w)} />}
+      {needsSetup && <SetupModal onStart={(d, w, t) => setStartInfo(d, w, t)} />}
 
       {/* ── DAY Counter ── */}
       <div className="text-center space-y-2 pt-2">

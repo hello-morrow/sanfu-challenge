@@ -41,8 +41,8 @@ export function useRecords() {
   );
 
   const setStartInfo = useCallback(
-    (startDate: string, startWeight: number) => {
-      setData((prev) => ({ ...prev, startDate, startWeight }));
+    (startDate: string, startWeight: number, targetWeight: number | null) => {
+      setData((prev) => ({ ...prev, startDate, startWeight, targetWeight }));
     },
     []
   );

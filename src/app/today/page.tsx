@@ -33,7 +33,7 @@ export default function TodayPage() {
 
   const submit = () => {
     setSaving(true);
-    if (!data.startDate) { const wv = parseFloat(w); if (!isNaN(wv) && wv > 0) setStartInfo(today, wv); }
+    if (!data.startDate) { const wv = parseFloat(w); if (!isNaN(wv) && wv > 0) setStartInfo(today, wv, null); }
     saveRecord({
       ...r, weight: w ? parseFloat(w) : null, breakfast: bf, lunch: lu, dinner: di,
       exercise: ex ? { type: EXERCISE_MAP[ex].type, distance: EXERCISE_MAP[ex].distance, minutes: parseInt(exMin) || 0 } : null,

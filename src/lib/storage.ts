@@ -5,6 +5,7 @@ export function getDefaultData(): AppData {
   return {
     startDate: "",
     startWeight: null,
+    targetWeight: null,
     records: [],
   };
 }

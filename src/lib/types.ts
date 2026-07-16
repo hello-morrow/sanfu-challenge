@@ -22,5 +22,6 @@ export interface DailyRecord {
 export interface AppData {
   startDate: string;
   startWeight: number | null;
+  targetWeight: number | null;
   records: DailyRecord[];
 }
