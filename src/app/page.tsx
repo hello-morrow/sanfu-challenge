@@ -5,6 +5,7 @@ import { useRecords } from "@/hooks/useRecords";
 import { MOOD_OPTIONS, COMIC_CHAPTERS, EXP_PER_MISSION } from "@/lib/constants";
 import SetupModal from "@/components/SetupModal";
 import PixelCharacter from "@/components/PixelCharacter";
+import SanfuHUD from "@/components/SanfuHUD";
 import type { Gender } from "@/lib/types";
 
 export default function Dashboard() {
@@ -47,10 +48,8 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* ── WARNING ── */}
-      <div className="border-2 border-primary/40 bg-primary/5 p-2 text-center">
-        <p className="text-[10px] font-extrabold text-primary pixel-text tracking-[0.25em]">⚠ HIGH TEMPERATURE WARNING</p>
-      </div>
+      {/* ── Sanfu HUD ── */}
+      {!needsSetup && <SanfuHUD />}
 
       {/* ── Base Scene ── */}
       <div className="border-2 border-dark bg-white/20 p-5 space-y-5">
