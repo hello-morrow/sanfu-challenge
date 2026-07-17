@@ -32,6 +32,7 @@ export default function TodayPage() {
 
   // Water
   const addWater = () => setR(prev => ({ ...prev, water: Math.min(prev.water + WATER_STEP, WATER_GOAL) }));
+  const removeWater = () => setR(prev => ({ ...prev, water: Math.max(prev.water - WATER_STEP, 0) }));
 
   // Diet
   const [bfTags, setBfTags] = useState<string[]>(r.breakfast.tags);
@@ -123,7 +124,8 @@ export default function TodayPage() {
             {Array.from({ length: WATER_GOAL / WATER_STEP }).map((_, i) => {
               const filled = i < Math.floor(r.water / WATER_STEP);
               return (
-                <button key={i} type="button" onClick={addWater}
+                <button key={i} type="button"
+                  onClick={() => filled ? removeWater() : addWater()}
                   className={`w-7 h-7 rounded-full flex items-center justify-center transition-all active:scale-90 ${
                     filled ? "bg-primary text-white text-[10px]" : "bg-dark/5 text-text-muted text-[10px]"
                   }`}>
