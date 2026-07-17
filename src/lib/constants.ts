@@ -1,13 +1,22 @@
-import type { ExerciseCategory } from "./types";
+import type { ExerciseCategory, MoodType } from "./types";
 
 export const WATER_GOAL = 2000;
 export const WATER_STEP = 250;
 
-export const BREAKFAST_TAGS = ["鸡蛋", "奇亚籽", "咖啡", "牛奶", "水果", "全麦面包", "燕麦"];
-export const LUNCH_TAGS = ["米饭", "肉类", "蔬菜", "面食", "沙拉", "豆制品"];
-export const DINNER_TAGS = ["蛋白质", "蔬菜", "少碳水", "汤", "沙拉", "鱼肉"];
+export const BREAKFAST_TAGS = ["鸡蛋", "牛奶", "咖啡", "全麦面包", "燕麦", "水果", "酸奶"];
+export const LUNCH_TAGS = ["米饭", "面食", "肉类", "鱼", "蔬菜", "汤", "豆制品"];
+export const DINNER_TAGS = ["沙拉", "蛋白质", "蔬菜", "粗粮", "鱼肉", "少碳水"];
 
-export const SNACK_OPTIONS = ["无", "零食", "水果", "饮料"];
+export const SNACK_OPTIONS = ["无", "水果", "坚果", "饮料", "零食", "奶茶", "其他"];
+
+// ── Mood ──
+export const MOOD_OPTIONS: { value: MoodType; label: string; emoji: string }[] = [
+  { value: "great",  label: "状态爆棚",   emoji: "🔥" },
+  { value: "good",   label: "还能战斗",   emoji: "💪" },
+  { value: "normal", label: "普普通通",   emoji: "🙂" },
+  { value: "tired",  label: "有点疲惫",   emoji: "😴" },
+  { value: "bad",    label: "被三伏天击败", emoji: "🥵" },
+];
 
 // ── Exercise Library ──
 export interface ExerciseDef {
@@ -22,21 +31,24 @@ export const EXERCISE_LIBRARY: ExerciseDef[] = [
   { label: "跑步 5km", category: "aerobic", distance: 5 },
   { label: "跑步 8km", category: "aerobic", distance: 8 },
   { label: "游泳", category: "aerobic" },
-  { label: "尊巴", category: "aerobic" },
-  { label: "跳舞", category: "aerobic" },
   { label: "骑行", category: "aerobic" },
   { label: "快走", category: "aerobic" },
   { label: "跳绳", category: "aerobic" },
-  { label: "瑜伽", category: "aerobic" },
+  { label: "椭圆机", category: "aerobic" },
+  { label: "尊巴", category: "aerobic" },
+  { label: "跳舞", category: "aerobic" },
   // 无氧
   { label: "力量训练", category: "anaerobic" },
   { label: "深蹲", category: "anaerobic" },
   { label: "臀桥", category: "anaerobic" },
-  { label: "卷腹", category: "anaerobic" },
   { label: "平板支撑", category: "anaerobic" },
-  { label: "哑铃", category: "anaerobic" },
+  { label: "卷腹", category: "anaerobic" },
+  { label: "哑铃训练", category: "anaerobic" },
   { label: "器械训练", category: "anaerobic" },
-  { label: "普拉提", category: "anaerobic" },
+  // 恢复
+  { label: "拉伸", category: "recovery" },
+  { label: "瑜伽", category: "recovery" },
+  { label: "普拉提", category: "recovery" },
 ];
 
 export const INTENSITY_OPTIONS = [
@@ -45,18 +57,15 @@ export const INTENSITY_OPTIONS = [
   { value: "intense", label: "高强度" },
 ] as const;
 
-// Legacy exercise labels → ExerciseDef lookup
 export const EXERCISE_LEGACY_MAP: Record<string, ExerciseDef> = {
   "跑步3km": { label: "跑步 3km", category: "aerobic", distance: 3 },
   "跑步5km": { label: "跑步 5km", category: "aerobic", distance: 5 },
   "跑步8km": { label: "跑步 8km", category: "aerobic", distance: 8 },
   "力量训练": { label: "力量训练", category: "anaerobic" },
-  "拉伸": { label: "瑜伽", category: "aerobic" },
+  "拉伸": { label: "拉伸", category: "recovery" },
 };
 
-// For backward compat in today page
 export const EXERCISE_OPTIONS = EXERCISE_LIBRARY.map(e => e.label);
-
 export const EXERCISE_MAP: Record<string, ExerciseDef> = {};
 EXERCISE_LIBRARY.forEach(e => { EXERCISE_MAP[e.label] = e; });
 
@@ -67,9 +76,9 @@ export const SLEEP_OPTIONS = [
 ] as const;
 
 export const DIET_RATINGS = [
-  { value: "good", label: "😋 健康", color: "text-primary" },
-  { value: "ok", label: "😐 一般", color: "text-accent" },
-  { value: "bad", label: "😈 放纵", color: "text-text-muted" },
+  { value: "good", label: "😋 健康" },
+  { value: "ok", label: "😐 一般" },
+  { value: "bad", label: "😈 放纵" },
 ] as const;
 
 export const MEASUREMENT_LABELS: { key: keyof import("./types").BodyMeasurements; label: string }[] = [

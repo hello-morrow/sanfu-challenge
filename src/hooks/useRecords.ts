@@ -56,10 +56,17 @@ export function useRecords() {
     let streak = 0;
     const sorted = [...data.records].sort((a, b) => b.date.localeCompare(a.date));
     for (let i = 0; i < sorted.length; i++) {
-      if (i === 0) { if (!sorted[i].completed) break; streak++; }
+      const r = sorted[i];
+      // 3 of 4 must be done: water, diet, exercise, sleep
+      const waterOk = r.water >= WATER_GOAL;
+      const dietOk = !!(r.breakfast?.tags?.length || r.lunch?.tags?.length || r.dinner?.tags?.length || r.snack);
+      const exerciseOk = r.exercise.length > 0;
+      const sleepOk = !!r.sleep;
+      const done = [waterOk, dietOk, exerciseOk, sleepOk].filter(Boolean).length >= 3;
+      if (i === 0) { if (done) streak++; else break; }
       else {
-        const diff = (new Date(sorted[i-1].date).getTime() - new Date(sorted[i].date).getTime()) / 86400000;
-        if (diff === 1 && sorted[i].completed) streak++; else break;
+        const diff = (new Date(sorted[i-1].date).getTime() - new Date(r.date).getTime()) / 86400000;
+        if (diff === 1 && done) streak++; else break;
       }
     }
     return streak;

@@ -1,4 +1,4 @@
-export type ExerciseCategory = "aerobic" | "anaerobic";
+export type ExerciseCategory = "aerobic" | "anaerobic" | "recovery";
 export type ExerciseIntensity = "light" | "moderate" | "intense";
 
 export interface ExerciseRecord {
@@ -19,14 +19,21 @@ export interface SnackRecord {
 }
 
 export interface BodyMeasurements {
-  waist: number | null;   // 腰围 cm
-  hip: number | null;     // 臀围
-  thigh: number | null;   // 大腿围
-  arm: number | null;     // 手臂围
-  chest: number | null;   // 胸围
+  waist: number | null;
+  hip: number | null;
+  thigh: number | null;
+  arm: number | null;
+  chest: number | null;
 }
 
 export type DietRating = "good" | "ok" | "bad";
+
+export type MoodType = "great" | "good" | "normal" | "tired" | "bad";
+
+export interface MoodRecord {
+  type: MoodType;
+  note: string;
+}
 
 export interface DailyRecord {
   date: string;
@@ -40,6 +47,7 @@ export interface DailyRecord {
   sleep: "less6" | "6to7" | "above7" | null;
   measurements: BodyMeasurements | null;
   dietRating: DietRating | null;
+  mood: MoodRecord | null;
   note?: string;
   completed: boolean;
 }

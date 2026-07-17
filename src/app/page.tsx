@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRecords } from "@/hooks/useRecords";
-import { WATER_GOAL, SLEEP_OPTIONS, MEASUREMENT_LABELS, DIET_RATINGS } from "@/lib/constants";
+import { WATER_GOAL, SLEEP_OPTIONS, MEASUREMENT_LABELS, DIET_RATINGS, MOOD_OPTIONS } from "@/lib/constants";
 import SetupModal from "@/components/SetupModal";
 import type { DailyRecord } from "@/lib/types";
 
@@ -122,6 +122,31 @@ export default function Dashboard() {
               <span className="text-[10px] text-text-muted font-medium">今日饮食评价</span>
             </div>
           )}
+
+          {/* Mood */}
+          {todayRecord?.mood && (
+            <div className="glass p-3 flex items-center gap-2">
+              <span className="text-lg">{MOOD_OPTIONS.find(o=>o.value===todayRecord.mood!.type)?.emoji}</span>
+              <div>
+                <p className="text-xs font-extrabold text-dark">
+                  {MOOD_OPTIONS.find(o=>o.value===todayRecord.mood!.type)?.label}
+                </p>
+                {todayRecord.mood.note && (
+                  <p className="text-[10px] text-text-muted font-medium">{todayRecord.mood.note}</p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Streak */}
+          <div className="glass p-4 text-center space-y-1">
+            <p className="text-3xl">🔥</p>
+            <p className="text-[36px] font-black text-primary">{streak}</p>
+            <p className="text-[10px] font-extrabold text-text-secondary uppercase tracking-widest">
+              连续挑战天数
+            </p>
+            <p className="text-[9px] text-text-muted font-medium">任意完成3项即计入挑战</p>
+          </div>
 
           {/* Challenges */}
           <div className="glass p-4 space-y-3">

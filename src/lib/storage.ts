@@ -70,6 +70,7 @@ function migrateRecord(r: Record<string, unknown>): DailyRecord {
     sleep: (["less6", "6to7", "above7"].includes(String(r.sleep)) ? String(r.sleep) : null) as DailyRecord["sleep"],
     measurements: migrateMeasurements(),
     dietRating: (["good", "ok", "bad"].includes(String(r.dietRating)) ? String(r.dietRating) : null) as DailyRecord["dietRating"],
+    mood: (r.mood as DailyRecord["mood"]) ?? null,
     note: typeof r.note === "string" ? r.note : undefined,
     completed: Boolean(r.completed),
   };

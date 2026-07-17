@@ -25,7 +25,7 @@ export function exportCSV(data: AppData): string {
     "早餐", "午餐", "晚餐", "加餐", "饮食评价",
     "运动", "时长(min)", "强度",
     "睡眠", "腰围(cm)", "臀围(cm)", "大腿围(cm)", "手臂围(cm)", "胸围(cm)",
-    "备注", "是否完成",
+    "今日状态", "心情备注", "备注", "是否完成",
   ];
 
   const rows = data.records.map(r => {
@@ -46,6 +46,8 @@ export function exportCSV(data: AppData): string {
       r.measurements?.thigh ?? "",
       r.measurements?.arm ?? "",
       r.measurements?.chest ?? "",
+      r.mood?.type ?? "",
+      r.mood?.note ?? "",
       r.note ?? "",
       r.completed ? "是" : "否",
     ].map(esc);

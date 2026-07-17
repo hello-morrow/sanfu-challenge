@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRecords } from "@/hooks/useRecords";
-import type { DailyRecord, ExerciseRecord, BodyMeasurements } from "@/lib/types";
+import type { DailyRecord, ExerciseRecord, BodyMeasurements, MoodRecord } from "@/lib/types";
 import {
   WATER_STEP, WATER_GOAL, BREAKFAST_TAGS, LUNCH_TAGS, DINNER_TAGS,
   SNACK_OPTIONS, EXERCISE_LIBRARY, INTENSITY_OPTIONS, SLEEP_OPTIONS,
-  DIET_RATINGS, MEASUREMENT_LABELS,
+  DIET_RATINGS, MEASUREMENT_LABELS, MOOD_OPTIONS,
 } from "@/lib/constants";
 import QuickTag from "@/components/QuickTag";
 
@@ -15,7 +15,7 @@ function emptyMeal() { return { tags: [], note: "" }; }
 function emptyMeas(): BodyMeasurements { return { waist: null, hip: null, thigh: null, arm: null, chest: null }; }
 function emptyRecord(d: string): DailyRecord {
   return { date: d, weight: null, water: 0, breakfast: emptyMeal(), lunch: emptyMeal(), dinner: emptyMeal(),
-    snack: null, exercise: [], sleep: null, measurements: null, dietRating: null, completed: false };
+    snack: null, exercise: [], sleep: null, measurements: null, dietRating: null, mood: null, completed: false };
 }
 
 export default function TodayPage() {
@@ -70,6 +70,10 @@ export default function TodayPage() {
   // Note
   const [note, setNote] = useState(r.note ?? "");
 
+  // Mood
+  const [moodType, setMoodType] = useState(r.mood?.type ?? "");
+  const [moodNote, setMoodNote] = useState(r.mood?.note ?? "");
+
   // Statuses
   const waterDone = r.water >= WATER_GOAL;
   const dietDone = !!(bfTags.length || luTags.length || diTags.length || snackType);
@@ -107,6 +111,7 @@ export default function TodayPage() {
       exercise: exercises,
       measurements: hasMeas ? meas : null,
       dietRating: (dietRating || null) as DailyRecord["dietRating"],
+      mood: moodType ? { type: moodType as MoodRecord["type"], note: moodNote } : null,
       sleep: (sl as DailyRecord["sleep"]) || null,
       note: note.trim() || undefined, completed: true,
     });
@@ -275,6 +280,31 @@ export default function TodayPage() {
                     {o.label}</button>
                 ))}
               </div>
+            </div>
+          )}
+        </div>
+
+        {/* Mood */}
+        <div className="glass overflow-hidden">
+          <button onClick={()=>toggle("mood")} className="w-full p-4 flex items-center gap-3 text-left">
+            <span className="text-xl">{moodType ? MOOD_OPTIONS.find(o=>o.value===moodType)?.emoji : "🧠"}</span>
+            <div className="flex-1"><p className="text-sm font-extrabold text-dark">今日状态</p>
+              <p className={`text-[11px] font-bold ${moodType?"text-primary":"text-text-muted"}`}>
+                {moodType ? MOOD_OPTIONS.find(o=>o.value===moodType)?.label : "记录心情"}</p></div>
+            <span className={`text-xs transition-transform ${expanded==="mood"?"rotate-180":""}`}>▼</span>
+          </button>
+          {expanded==="mood" && (
+            <div className="px-4 pb-4 space-y-3 border-t border-dark/5 pt-3">
+              <div className="flex gap-2 flex-wrap">
+                {MOOD_OPTIONS.map(o=>(
+                  <button key={o.value} onClick={()=>setMoodType(o.value===moodType?"":o.value)}
+                    className={`px-3 py-2.5 rounded-xl text-sm font-bold transition-all active:scale-95 ${moodType===o.value?"bg-primary text-white shadow-sm":"bg-dark/5 text-text-secondary hover:bg-dark/10"}`}>
+                    {o.emoji} {o.label}</button>
+                ))}
+              </div>
+              <input type="text" placeholder="心情备注（可选）..." value={moodNote}
+                onChange={e=>setMoodNote(e.target.value)}
+                className="w-full bg-base rounded-xl px-3 py-2 text-xs font-medium text-dark placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
             </div>
           )}
         </div>
