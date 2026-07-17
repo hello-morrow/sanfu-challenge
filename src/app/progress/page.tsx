@@ -5,8 +5,8 @@ import { useRecords } from "@/hooks/useRecords";
 export default function ProgressPage() {
   const { data, streakDays } = useRecords();
   const wRecs = data.records.filter(r => r.weight !== null).sort((a, b) => a.date.localeCompare(b.date));
-  const totalKm = data.records.reduce((s, r) => s + (r.exercise?.distance ?? 0), 0);
-  const totalTrainings = data.records.filter(r => r.exercise).length;
+  const totalKm = data.records.reduce((s, r) => s + r.exercise.reduce((ss, e) => ss + (e.distance ?? 0), 0), 0);
+  const totalTrainings = data.records.filter(r => r.exercise.length > 0).length;
   const streak = streakDays();
   const curW = wRecs.length > 0 ? wRecs[wRecs.length - 1].weight : null;
   const loss = data.startWeight !== null && curW !== null ? curW - data.startWeight : null;

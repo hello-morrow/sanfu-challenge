@@ -6,14 +6,24 @@ export interface ExerciseRecord {
   minutes: number;
 }
 
+export interface MealRecord {
+  tags: string[];
+  note: string;
+}
+
+export interface SnackRecord {
+  type: string; // "none" | "零食" | "水果" | "饮料" | custom string
+}
+
 export interface DailyRecord {
   date: string;
   weight: number | null;
   water: number;
-  breakfast: string;
-  lunch: string;
-  dinner: string;
-  exercise: ExerciseRecord | null;
+  breakfast: MealRecord;
+  lunch: MealRecord;
+  dinner: MealRecord;
+  snack: SnackRecord | null;
+  exercise: ExerciseRecord[];
   sleep: "less6" | "6to7" | "above7" | null;
   note?: string;
   completed: boolean;
