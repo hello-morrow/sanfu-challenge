@@ -48,7 +48,7 @@ export default function ProgressPage() {
 
       {/* Weight Chart */}
       {wvals.length >= 2 && (
-        <div className="glass p-5 space-y-3">
+        <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
           <h3 className="text-xs font-extrabold text-text-secondary uppercase tracking-widest">体重趋势</h3>
           <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[320px] mx-auto">
             {[0,0.25,0.5,0.75,1].map(f=><line key={f} x1={PX} x2={PX+PW} y1={PY+PH*f} y2={PY+PH*f} stroke="#E8E0D4" strokeWidth="0.5"/>)}
@@ -61,7 +61,7 @@ export default function ProgressPage() {
       )}
 
       {/* Measurements */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-xs font-extrabold text-text-secondary uppercase tracking-widest">围度变化</h3>
         {latestMeas ? (
           <div className="grid grid-cols-3 gap-2">
@@ -85,7 +85,7 @@ export default function ProgressPage() {
       </div>
 
       {/* Exercise Stats */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-xs font-extrabold text-text-secondary uppercase tracking-widest">运动统计</h3>
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-base/60 rounded-xl p-3 text-center">
@@ -114,11 +114,11 @@ export default function ProgressPage() {
       {/* Export */}
       <div className="grid grid-cols-2 gap-3">
         <button onClick={handleExportCSV}
-          className="glass p-4 text-center font-extrabold text-sm text-dark hover:ring-2 hover:ring-primary/30 transition-all active:scale-95">
+          className="border-2 border-dark bg-white/40 p-4 text-center font-extrabold text-sm text-dark hover:ring-2 hover:ring-primary/30 transition-all active:scale-95">
           📊 导出 CSV
         </button>
         <button onClick={handleExportJSON}
-          className="glass p-4 text-center font-extrabold text-sm text-dark hover:ring-2 hover:ring-primary/30 transition-all active:scale-95">
+          className="border-2 border-dark bg-white/40 p-4 text-center font-extrabold text-sm text-dark hover:ring-2 hover:ring-primary/30 transition-all active:scale-95">
           📦 导出 JSON
         </button>
       </div>
@@ -132,7 +132,7 @@ export default function ProgressPage() {
 
 function SCard({label,value,unit,hi}:{label:string;value:string;unit:string;hi?:boolean}) {
   return (
-    <div className="glass p-3 text-center space-y-0.5">
+    <div className="border-2 border-dark bg-white/40 p-3 text-center space-y-0.5">
       <p className="text-[10px] font-extrabold text-text-secondary uppercase tracking-wider">{label}</p>
       <p className={`text-lg font-black ${hi?"text-primary":"text-dark"}`}>
         {value}<span className="text-[10px] font-normal text-text-muted ml-0.5">{unit}</span>

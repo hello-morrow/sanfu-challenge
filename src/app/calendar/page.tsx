@@ -30,7 +30,7 @@ export default function CalendarPage() {
       </div>
 
       {/* Start + Progress */}
-      <div className="pixel-card p-5 text-center space-y-2">
+      <div className="border-2 border-dark bg-white/40 p-5 text-center space-y-2">
         <div className="text-3xl">🗺️</div>
         <p className="text-sm font-extrabold text-dark pixel-text">{completed}/40 节点已点亮</p>
         <p className="text-xs text-text-muted font-medium">连续挑战 🔥 {streak} 天</p>
@@ -41,7 +41,7 @@ export default function CalendarPage() {
 
       {/* Timeline */}
       {data.startDate && (
-        <div className="pixel-card p-5">
+        <div className="border-2 border-dark bg-white/40 p-5">
           <div className="relative pl-6 border-l-2 border-primary/30 space-y-4">
             {/* START */}
             <div className="relative">
@@ -89,7 +89,7 @@ export default function CalendarPage() {
       )}
 
       {!data.startDate && (
-        <div className="pixel-card p-8 text-center">
+        <div className="border-2 border-dark bg-white/40 p-8 text-center">
           <p className="text-sm text-text-muted font-bold pixel-text">记录第一天数据后<br/>生存路线将开启</p>
         </div>
       )}

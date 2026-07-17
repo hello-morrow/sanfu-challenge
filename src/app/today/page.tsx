@@ -130,7 +130,7 @@ export default function TodayPage() {
 
       <div className="space-y-2">
         {/* Water */}
-        <div className="glass p-4">
+        <div className="border-2 border-dark bg-white/40 p-4">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-xl">💧</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">喝水</p>
@@ -149,7 +149,7 @@ export default function TodayPage() {
         </div>
 
         {/* Diet */}
-        <div className="glass overflow-hidden">
+        <div className="border-2 border-dark bg-white/40 overflow-hidden">
           <button onClick={()=>toggle("diet")} className="w-full p-4 flex items-center gap-3 text-left">
             <span className="text-xl">🍚</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">饮食</p>
@@ -191,7 +191,7 @@ export default function TodayPage() {
         </div>
 
         {/* Exercise */}
-        <div className="glass overflow-hidden">
+        <div className="border-2 border-dark bg-white/40 overflow-hidden">
           <button onClick={()=>toggle("exercise")} className="w-full p-4 flex items-center gap-3 text-left">
             <span className="text-xl">🏃</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">运动</p>
@@ -236,7 +236,7 @@ export default function TodayPage() {
         </div>
 
         {/* Measurements */}
-        <div className="glass overflow-hidden">
+        <div className="border-2 border-dark bg-white/40 overflow-hidden">
           <button onClick={()=>toggle("measurements")} className="w-full p-4 flex items-center gap-3 text-left">
             <span className="text-xl">📏</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">身体围度</p>
@@ -263,7 +263,7 @@ export default function TodayPage() {
         </div>
 
         {/* Sleep */}
-        <div className="glass overflow-hidden">
+        <div className="border-2 border-dark bg-white/40 overflow-hidden">
           <button onClick={()=>toggle("sleep")} className="w-full p-4 flex items-center gap-3 text-left">
             <span className="text-xl">😴</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">睡眠</p>
@@ -285,7 +285,7 @@ export default function TodayPage() {
         </div>
 
         {/* Mood */}
-        <div className="glass overflow-hidden">
+        <div className="border-2 border-dark bg-white/40 overflow-hidden">
           <button onClick={()=>toggle("mood")} className="w-full p-4 flex items-center gap-3 text-left">
             <span className="text-xl">{moodType ? MOOD_OPTIONS.find(o=>o.value===moodType)?.emoji : "🧠"}</span>
             <div className="flex-1"><p className="text-sm font-extrabold text-dark">今日状态</p>
@@ -311,7 +311,7 @@ export default function TodayPage() {
       </div>
 
       {/* Weight */}
-      <div className="glass p-4 flex items-center gap-3">
+      <div className="border-2 border-dark bg-white/40 p-4 flex items-center gap-3">
         <span className="text-xl">⚖️</span>
         <input type="number" inputMode="decimal" step="0.1" placeholder="今日体重" value={w} onChange={e=>setW(e.target.value)}
           className="flex-1 bg-transparent text-lg font-black text-dark placeholder:text-text-muted focus:outline-none" />
@@ -319,7 +319,7 @@ export default function TodayPage() {
       </div>
 
       {/* Note */}
-      <div className="glass p-4">
+      <div className="border-2 border-dark bg-white/40 p-4">
         <textarea placeholder="📝 今日总结（可选）" value={note} onChange={e=>setNote(e.target.value)} rows={2}
           className="w-full bg-transparent text-sm font-medium text-dark placeholder:text-text-muted focus:outline-none resize-none" />
       </div>

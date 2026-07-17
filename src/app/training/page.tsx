@@ -12,7 +12,7 @@ export default function TrainingPage() {
       </div>
 
       {/* Principles */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-sm font-extrabold text-dark">🎯 训练原则</h3>
         <div className="space-y-2 text-sm font-medium text-text-secondary">
           <div className="flex items-start gap-2"><span className="text-primary font-extrabold">1.</span> 每周运动 5-6 天，休息 1-2 天</div>
@@ -23,7 +23,7 @@ export default function TrainingPage() {
       </div>
 
       {/* Aerobic */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-sm font-extrabold text-dark">🏃 有氧训练</h3>
         <p className="text-xs text-text-secondary font-medium">燃脂 · 心肺 · 耐力</p>
         <div className="bg-base/60 rounded-xl p-3 grid grid-cols-2 gap-2">
@@ -37,7 +37,7 @@ export default function TrainingPage() {
       </div>
 
       {/* Anaerobic */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-sm font-extrabold text-dark">💪 无氧训练</h3>
         <p className="text-xs text-text-secondary font-medium">塑形 · 力量 · 核心</p>
         <div className="bg-base/60 rounded-xl p-3 grid grid-cols-2 gap-2">
@@ -50,7 +50,7 @@ export default function TrainingPage() {
       </div>
 
       {/* Weekly Schedule */}
-      <div className="glass p-5 space-y-3">
+      <div className="border-2 border-dark bg-white/40 p-5 space-y-3">
         <h3 className="text-sm font-extrabold text-dark">📅 每周参考安排</h3>
         <div className="divide-y divide-dark/5">
           {[
@@ -74,7 +74,7 @@ export default function TrainingPage() {
         </div>
       </div>
 
-      <div className="glass p-4">
+      <div className="border-2 border-dark bg-white/40 p-4">
         <p className="text-xs text-dark/50 font-medium leading-relaxed">⚠️ 以上为参考计划，请根据自身体能调整。运动前充分热身，运动后拉伸放松。如感不适请立即停止。</p>
       </div>
     </div>
