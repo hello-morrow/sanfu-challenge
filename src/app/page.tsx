@@ -6,6 +6,8 @@ import { MOOD_OPTIONS, COMIC_CHAPTERS, EXP_PER_MISSION } from "@/lib/constants";
 import SetupModal from "@/components/SetupModal";
 import PixelCharacter from "@/components/PixelCharacter";
 import SanfuHUD from "@/components/SanfuHUD";
+import PetBubble from "@/components/PetBubble";
+import { CLASS_DEFS } from "@/lib/types";
 import type { Gender } from "@/lib/types";
 
 export default function Dashboard() {
@@ -32,8 +34,8 @@ export default function Dashboard() {
     <div className="space-y-4 animate-slide-up pb-4">
       {/* Character Creation */}
       {needsSetup && (
-        <SetupModal onCreate={(name, gender, date, weight) => {
-          createSurvivor({ name, gender, createdAt: date }, date, weight, null);
+        <SetupModal onCreate={(name, gender, cls, date, weight) => {
+          createSurvivor({ name, gender, class: cls, createdAt: date }, date, weight, null);
         }} />
       )}
 
@@ -100,6 +102,11 @@ export default function Dashboard() {
                 <span className="text-[9px] font-extrabold bg-dark text-white px-2 py-0.5 pixel-text">LV.{playerLevel.level}</span>
               </div>
               <p className="text-[10px] text-text-muted font-medium">{playerLevel.name}</p>
+              {survivor && (
+                <p className="text-[9px] font-bold mt-0.5" style={{color: CLASS_DEFS.find(c=>c.id===survivor.class)?.color}}>
+                  {CLASS_DEFS.find(c=>c.id===survivor.class)?.emoji} {CLASS_DEFS.find(c=>c.id===survivor.class)?.name}
+                </p>
+              )}
             </div>
             <div className="text-right">
               <p className="text-xs text-text-muted font-bold">EXP</p>
@@ -120,6 +127,9 @@ export default function Dashboard() {
 
       {!needsSetup && (
         <>
+          {/* ── Pet ── */}
+          <PetBubble streak={streak} day={day} />
+
           {/* ── MISSION LOG ── */}
           <div className="border-2 border-dark bg-white/40">
             <div className="bg-dark text-base px-3 py-1.5 flex items-center justify-between">
