@@ -68,20 +68,34 @@ export default function PetBubble({ streak, day }: Props) {
       {/* Sun pet */}
       <div className={`text-2xl transition-transform ${bounce ? "translate-y-[-2px]" : ""}`}
         style={{ animation: "pixel-breathe 2s ease-in-out infinite" }}>
-        <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
-          <circle cx="16" cy="16" r="10" fill="#FFB703" />
-          <rect x="13" y="12" width="3" height="3" fill="#1A1A1A" />
-          <rect x="20" y="12" width="3" height="3" fill="#1A1A1A" />
-          <rect x="14" y="18" width="8" height="2" fill="#1A1A1A" opacity="0.5" />
-          {/* Rays */}
-          <rect x="16" y="3" width="2" height="4" fill="#FFB703" />
-          <rect x="16" y="25" width="2" height="4" fill="#FFB703" />
-          <rect x="3" y="16" width="4" height="2" fill="#FFB703" />
-          <rect x="25" y="16" width="4" height="2" fill="#FFB703" />
-          <rect x="8" y="8" width="2" height="2" fill="#FFB703" />
-          <rect x="22" y="8" width="2" height="2" fill="#FFB703" />
-          <rect x="8" y="22" width="2" height="2" fill="#FFB703" />
-          <rect x="22" y="22" width="2" height="2" fill="#FFB703" />
+        <svg width="36" height="36" viewBox="0 0 36 36" shapeRendering="crispEdges">
+          {/* Soft glow behind */}
+          <circle cx="18" cy="18" r="16" fill="#FFF3D6" opacity="0.5" />
+          {/* Main body */}
+          <circle cx="18" cy="18" r="13" fill="#FFB703" />
+          {/* Big cute eyes — white bg */}
+          <rect x="10" y="11" width="7" height="7" rx="1" fill="white" />
+          <rect x="19" y="11" width="7" height="7" rx="1" fill="white" />
+          {/* Pupils — big and centered */}
+          <rect x="12" y="13" width="3" height="3" fill="#1A1A1A" />
+          <rect x="21" y="13" width="3" height="3" fill="#1A1A1A" />
+          {/* Eye shine */}
+          <rect x="13" y="12" width="1" height="1" fill="white" />
+          <rect x="22" y="12" width="1" height="1" fill="white" />
+          {/* Rosy cheeks */}
+          <rect x="7" y="17" width="4" height="2" rx="1" fill="#FFB7A1" opacity="0.6" />
+          <rect x="25" y="17" width="4" height="2" rx="1" fill="#FFB7A1" opacity="0.6" />
+          {/* Cute small smile */}
+          <rect x="14" y="21" width="8" height="2" rx="1" fill="#1A1A1A" opacity="0.6" />
+          {/* Soft small rays */}
+          <rect x="17" y="3" width="2" height="3" rx="1" fill="#FFD166" />
+          <rect x="17" y="30" width="2" height="3" rx="1" fill="#FFD166" />
+          <rect x="3" y="17" width="3" height="2" rx="1" fill="#FFD166" />
+          <rect x="30" y="17" width="3" height="2" rx="1" fill="#FFD166" />
+          <rect x="8" y="8" width="2" height="2" rx="1" fill="#FFD166" />
+          <rect x="26" y="8" width="2" height="2" rx="1" fill="#FFD166" />
+          <rect x="8" y="26" width="2" height="2" rx="1" fill="#FFD166" />
+          <rect x="26" y="26" width="2" height="2" rx="1" fill="#FFD166" />
         </svg>
       </div>
 
