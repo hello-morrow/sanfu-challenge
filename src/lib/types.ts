@@ -1,9 +1,12 @@
-export type ExerciseType = "run3" | "run5" | "run8" | "strength" | "stretch";
+export type ExerciseCategory = "aerobic" | "anaerobic";
+export type ExerciseIntensity = "light" | "moderate" | "intense";
 
 export interface ExerciseRecord {
-  type: ExerciseType;
+  category: ExerciseCategory;
+  type: string;
+  duration: number;
+  intensity: ExerciseIntensity;
   distance?: number;
-  minutes: number;
 }
 
 export interface MealRecord {
@@ -12,8 +15,18 @@ export interface MealRecord {
 }
 
 export interface SnackRecord {
-  type: string; // "none" | "零食" | "水果" | "饮料" | custom string
+  type: string;
 }
+
+export interface BodyMeasurements {
+  waist: number | null;   // 腰围 cm
+  hip: number | null;     // 臀围
+  thigh: number | null;   // 大腿围
+  arm: number | null;     // 手臂围
+  chest: number | null;   // 胸围
+}
+
+export type DietRating = "good" | "ok" | "bad";
 
 export interface DailyRecord {
   date: string;
@@ -25,6 +38,8 @@ export interface DailyRecord {
   snack: SnackRecord | null;
   exercise: ExerciseRecord[];
   sleep: "less6" | "6to7" | "above7" | null;
+  measurements: BodyMeasurements | null;
+  dietRating: DietRating | null;
   note?: string;
   completed: boolean;
 }
