@@ -11,6 +11,7 @@
   --color-text-secondary: #4A4A4A;
   --color-text-muted: #8A8A8A;
   --font-pixel: "Courier New", "Consolas", "Monaco", monospace;
+  --radius-none: 0px;
 }
 
 body {
@@ -20,142 +21,125 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-
 html { height: 100%; }
 body { min-height: 100%; min-height: 100dvh; }
 ::-webkit-scrollbar { width: 0; height: 0; }
 
-/* ══════ Pixel Card ══════ */
-.pixel-card {
+/* ══════ Pixel Window — the ONE unified container ══════ */
+.pixel-window {
   background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 3px 3px 0 rgba(26,26,26,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
-  border: 2px solid rgba(26,26,26,0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 2px solid #1A1A1A;
+  box-shadow:
+    3px 3px 0 rgba(26,26,26,0.08),
+    inset -2px -2px 0 rgba(26,26,26,0.05),
+    inset 2px 2px 0 rgba(255,255,255,0.3);
+  border-radius: 0;
+  image-rendering: pixelated;
 }
 
+/* Pixel window header bar */
+.pixel-window-header {
+  background: #1A1A1A;
+  color: #F5E6CC;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+/* ══════ Pixel Button ══════ */
 .pixel-btn {
   font-family: var(--font-pixel);
   font-weight: bold;
   letter-spacing: 0.05em;
-  box-shadow: 3px 3px 0 rgba(26,26,26,0.15);
-  border: 2px solid rgba(26,26,26,0.2);
+  box-shadow: 3px 3px 0 rgba(26,26,26,0.2);
+  border: 2px solid #1A1A1A;
+  border-radius: 0;
   transition: all 0.1s;
+  image-rendering: pixelated;
 }
-.pixel-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(26,26,26,0.15); }
+.pixel-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(26,26,26,0.2); }
+
+/* Primary variant */
+.pixel-btn-primary {
+  background: #FF6B35;
+  color: #fff;
+  border-color: #1A1A1A;
+}
 
 .pixel-text { font-family: var(--font-pixel); letter-spacing: 0.05em; }
 
-/* ══════ Heat Wave Effects ══════ */
+/* ══════ RPG Bars ══════ */
+.rpg-bar {
+  height: 8px;
+  background: rgba(26,26,26,0.08);
+  border: 1px solid rgba(26,26,26,0.15);
+  border-radius: 0;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+.rpg-bar-fill { height: 100%; transition: width 0.5s; border-radius: 0; }
 
-/* Heat shimmer overlay — transparent wavy distortion */
+/* ══════ Character Creation ══════ */
+.char-option {
+  border: 2px solid transparent;
+  transition: all 0.15s;
+  border-radius: 0;
+  image-rendering: pixelated;
+}
+.char-option:hover { border-color: rgba(26,26,26,0.15); }
+.char-option-selected { border-color: #FF6B35 !important; background: rgba(255,107,53,0.06); }
+
+/* ══════ Heat Effects ══════ */
 .heat-shimmer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(255,107,53,0.03) 3px,
-    rgba(255,107,53,0.03) 4px
-  );
-  animation: heat-wave 4s ease-in-out infinite;
+  position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,107,53,0.04) 3px, rgba(255,107,53,0.04) 4px);
+  animation: heat-wave 3s ease-in-out infinite;
 }
-
 @keyframes heat-wave {
-  0%, 100% { transform: translateY(0) skewX(0); opacity: 0.6; }
-  25% { transform: translateY(-2px) skewX(0.3deg); opacity: 0.8; }
-  50% { transform: translateY(0) skewX(0); opacity: 0.5; }
-  75% { transform: translateY(2px) skewX(-0.3deg); opacity: 0.8; }
+  0%,100% { transform: translateY(0) skewX(0); opacity: 0.5; }
+  25% { transform: translateY(-3px) skewX(0.5deg); opacity: 0.8; }
+  50% { transform: translateY(0) skewX(0); opacity: 0.4; }
+  75% { transform: translateY(3px) skewX(-0.5deg); opacity: 0.8; }
 }
 
-/* Sun glow at top */
 .sun-glow {
-  position: fixed;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,183,3,0.25) 0%, rgba(255,107,53,0.08) 40%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+  position: fixed; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 240px; height: 240px;
+  background: radial-gradient(circle, rgba(255,183,3,0.3) 0%, rgba(255,107,53,0.1) 40%, transparent 70%);
+  border-radius: 50%; pointer-events: none; z-index: 0;
   animation: sun-pulse 3s ease-in-out infinite;
 }
+@keyframes sun-pulse { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.1); } }
 
-@keyframes sun-pulse {
-  0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.08); }
-}
-
-/* Floating dust particles */
-.dust-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
+.dust-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .dust-particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: rgba(26,26,26,0.15);
-  border-radius: 50%;
+  position: absolute; background: rgba(26,26,26,0.12); border-radius: 50%;
   animation: dust-float linear infinite;
 }
-
 @keyframes dust-float {
   0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-  10% { opacity: 0.6; }
-  90% { opacity: 0.6; }
-  100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+  10% { opacity: 0.5; } 90% { opacity: 0.5; }
+  100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
 }
 
-/* Sweat drop animation */
-@keyframes sweat-drop {
-  0% { transform: translateY(0); opacity: 0.7; }
-  80% { transform: translateY(20px); opacity: 0.3; }
-  100% { transform: translateY(24px); opacity: 0; }
+/* ══════ Sweat / Animations ══════ */
+@keyframes sweat-fall {
+  0% { transform: translateY(0); opacity: 0; }
+  5% { opacity: 0.6; }
+  100% { transform: translateY(30px); opacity: 0; }
 }
 
-/* ══════ Pixel Character ══════ */
-@keyframes pixel-breathe {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(1.03); }
-}
+@keyframes pixel-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.04); } }
+@keyframes level-up-flash { 0%,50%,100% { opacity: 1; } 25%,75% { opacity: 0.3; } }
 
-@keyframes pixel-wipe {
-  0%, 90%, 100% { transform: translate(0, 0); }
-  45% { transform: translate(2px, -2px); }
-}
-
-/* ══════ RPG Elements ══════ */
-.rpg-log {
-  background: rgba(245, 230, 204, 0.7);
-  border: 2px solid rgba(26,26,26,0.2);
-  box-shadow: 3px 3px 0 rgba(26,26,26,0.1);
-  font-family: var(--font-pixel);
-}
-
-@keyframes xp-gain {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-20px); opacity: 0; }
-}
-
-/* ══════ General ══════ */
-@keyframes burn-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
 .animate-burn { animation: burn-pulse 2s ease-in-out infinite; }
+@keyframes burn-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-@keyframes slide-up {
-  from { transform: translateY(16px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
 .animate-slide-up { animation: slide-up 0.4s ease-out forwards; }
+@keyframes slide-up { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

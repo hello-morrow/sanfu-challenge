@@ -2,7 +2,7 @@ import type { AppData, DailyRecord, MealRecord, ExerciseRecord, BodyMeasurements
 import { STORAGE_KEY, EXERCISE_LEGACY_MAP } from "./constants";
 
 function getDefaultData(): AppData {
-  return { startDate: "", startWeight: null, targetWeight: null, records: [] };
+  return { survivor: null, startDate: "", startWeight: null, targetWeight: null, records: [] };
 }
 
 function migrateRecord(r: Record<string, unknown>): DailyRecord {
@@ -83,6 +83,7 @@ export function loadData(): AppData {
     if (!raw) return getDefaultData();
     const parsed = JSON.parse(raw);
     const data: AppData = {
+      survivor: (parsed.survivor as AppData["survivor"]) ?? null,
       startDate: String(parsed.startDate ?? ""),
       startWeight: typeof parsed.startWeight === "number" ? parsed.startWeight : null,
       targetWeight: typeof parsed.targetWeight === "number" ? parsed.targetWeight : null,
