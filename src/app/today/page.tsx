@@ -20,11 +20,12 @@ function emptyRecord(d: string): DailyRecord {
 
 export default function TodayPage() {
   const router = useRouter();
-  const { data, today, todayRecord, saveRecord, setStartInfo } = useRecords();
+  const { data, today, todayRecord, saveRecord, setStartInfo, createSurvivor, playerLevel } = useRecords();
   const [r, setR] = useState<DailyRecord>(todayRecord ?? emptyRecord(today));
   const [saving, setSaving] = useState(false);
   useEffect(() => { if (todayRecord) setR(todayRecord); }, [todayRecord]);
 
+  const survivor = data.survivor;
   const [expanded, setExpanded] = useState<string | null>(null);
   const toggle = (id: string) => setExpanded(p => p === id ? null : id);
 
@@ -125,6 +126,7 @@ export default function TodayPage() {
     <div className="space-y-5 animate-slide-up pb-8">
       <div className="text-center space-y-1 pt-2">
         <p className="text-[48px] font-black text-dark leading-none">DAY {String(dayNum).padStart(2,"0")}</p>
+        {survivor && <p className="text-xs font-bold text-dark pixel-text">{survivor.name} · LV.{playerLevel.level}</p>}
         <p className="text-xs text-text-muted font-bold">今日生存任务</p>
       </div>
 
