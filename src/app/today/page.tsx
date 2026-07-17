@@ -125,7 +125,7 @@ export default function TodayPage() {
     <div className="space-y-5 animate-slide-up pb-8">
       <div className="text-center space-y-1 pt-2">
         <p className="text-[48px] font-black text-dark leading-none">DAY {String(dayNum).padStart(2,"0")}</p>
-        <p className="text-xs text-text-muted font-bold">今日任务</p>
+        <p className="text-xs text-text-muted font-bold">今日生存任务</p>
       </div>
 
       <div className="space-y-2">

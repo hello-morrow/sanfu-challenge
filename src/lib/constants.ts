@@ -91,3 +91,32 @@ export const MEASUREMENT_LABELS: { key: keyof import("./types").BodyMeasurements
 
 export const STORAGE_KEY = "sanfu-data";
 export const TOTAL_DAYS = 40;
+
+// ── Comic Chapters ──
+export const COMIC_CHAPTERS = [
+  { episode: 1,  title: "炎热的第一天",     text: "窗外的蝉鸣震耳欲聋。40天，从今天开始。", unlockedDay: 1 },
+  { episode: 2,  title: "第一次适应高温",   text: "出汗成了日常。身体开始接受这个节奏。", unlockedDay: 7 },
+  { episode: 3,  title: "补给的重要性",     text: "水不是选择，是生存必需品。", unlockedDay: 10 },
+  { episode: 4,  title: "真正困难的是坚持", text: "第20天。新鲜感早已消失，剩下的只有习惯。", unlockedDay: 20 },
+  { episode: 5,  title: "身体的回答",       text: "围度在变，体重在降。身体用数据回应了你的坚持。", unlockedDay: 25 },
+  { episode: 6,  title: "最后的冲刺",       text: "最后10天。训练基地已初具规模。", unlockedDay: 30 },
+  { episode: 7,  title: "最终挑战完成",     text: "40天。你不是瘦了多少，你是变成了一个能坚持40天的人。", unlockedDay: 40 },
+];
+
+// ── Base Stages ──
+export const BASE_STAGES: { stage: import("./types").BaseStage; fromDay: number; name: string; emoji: string; desc: string }[] = [
+  { stage: "abandoned", fromDay: 1,  name: "废弃训练基地", emoji: "🏚️",  desc: "一切从这里开始" },
+  { stage: "water",     fromDay: 7,  name: "初级基地",     emoji: "🌱",  desc: "水站已建立 · 植物开始生长" },
+  { stage: "repair",    fromDay: 15, name: "修复基地",     emoji: "🏠",  desc: "小屋修复 · 简易跑道建成" },
+  { stage: "training",  fromDay: 30, name: "训练基地",     emoji: "🏋️",  desc: "完整训练区域投入使用" },
+  { stage: "complete",  fromDay: 40, name: "SANFU CAMP",   emoji: "🏆",  desc: "40天挑战达成！" },
+];
+
+// ── Level System ──
+export const LEVEL_THRESHOLDS = [
+  { level: 1 as const, minStreak: 0,  name: "新手生存者", emoji: "🧍" },
+  { level: 2 as const, minStreak: 7,  name: "适应者",     emoji: "💪" },
+  { level: 3 as const, minStreak: 14, name: "训练兵",     emoji: "🏃" },
+  { level: 4 as const, minStreak: 21, name: "战士",       emoji: "⚔️" },
+  { level: 5 as const, minStreak: 30, name: "SANFU大师",  emoji: "🔥" },
+];

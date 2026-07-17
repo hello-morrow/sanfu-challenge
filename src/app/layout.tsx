@@ -3,8 +3,8 @@ import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
-  title: "三伏天备战计划",
-  description: "40天三伏天减脂挑战训练营",
+  title: "三伏天：40日生存挑战",
+  description: "40日夏季生存成长模拟器",
   manifest: "/manifest.json",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "三伏天" },
 };

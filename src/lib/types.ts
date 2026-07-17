@@ -9,31 +9,26 @@ export interface ExerciseRecord {
   distance?: number;
 }
 
-export interface MealRecord {
-  tags: string[];
-  note: string;
-}
-
-export interface SnackRecord {
-  type: string;
-}
-
+export interface MealRecord { tags: string[]; note: string; }
+export interface SnackRecord { type: string; }
 export interface BodyMeasurements {
-  waist: number | null;
-  hip: number | null;
-  thigh: number | null;
-  arm: number | null;
-  chest: number | null;
+  waist: number | null; hip: number | null; thigh: number | null;
+  arm: number | null; chest: number | null;
 }
-
 export type DietRating = "good" | "ok" | "bad";
-
 export type MoodType = "great" | "good" | "normal" | "tired" | "bad";
 
-export interface MoodRecord {
-  type: MoodType;
-  note: string;
+export interface MoodRecord { type: MoodType; note: string; }
+
+export interface ComicChapter {
+  episode: number;
+  title: string;
+  text: string;
+  unlockedDay: number;
 }
+
+export type Level = 1 | 2 | 3 | 4 | 5;
+export type BaseStage = "abandoned" | "water" | "repair" | "training" | "complete";
 
 export interface DailyRecord {
   date: string;

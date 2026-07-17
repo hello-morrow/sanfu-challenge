@@ -35,8 +35,8 @@ export default function ProgressPage() {
   return (
     <div className="space-y-5 animate-slide-up">
       <div className="text-center space-y-1 pt-2">
-        <p className="text-[28px] font-black text-dark leading-tight">我的蜕变</p>
-        <p className="text-xs text-text-muted font-bold">看见每一天的改变</p>
+        <p className="text-[28px] font-black text-dark leading-tight">生存档案</p>
+        <p className="text-xs text-text-muted font-bold">40天的身体变化</p>
       </div>
 
       {/* Weight Stats */}

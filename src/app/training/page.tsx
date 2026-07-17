@@ -7,8 +7,8 @@ export default function TrainingPage() {
   return (
     <div className="space-y-5 animate-slide-up">
       <div className="text-center space-y-1 pt-2">
-        <p className="text-[28px] font-black text-dark leading-tight">训练计划</p>
-        <p className="text-xs text-text-muted font-bold">40 天蜕变训练营</p>
+        <p className="text-[28px] font-black text-dark leading-tight">训练日志</p>
+        <p className="text-xs text-text-muted font-bold">40 天训练计划</p>
       </div>
 
       {/* Principles */}

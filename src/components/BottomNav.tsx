@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "/", label: "首页", icon: HomeIcon },
-  { href: "/today", label: "打卡", icon: CheckIcon },
-  { href: "/training", label: "规则", icon: ListIcon },
-  { href: "/progress", label: "变化", icon: ChartIcon },
-  { href: "/calendar", label: "日历", icon: CalendarIcon },
+  { href: "/", label: "基地", icon: HomeIcon },
+  { href: "/today", label: "任务", icon: CheckIcon },
+  { href: "/training", label: "训练", icon: ListIcon },
+  { href: "/progress", label: "档案", icon: ChartIcon },
+  { href: "/calendar", label: "路线", icon: CalendarIcon },
 ];
 
 export default function BottomNav() {
