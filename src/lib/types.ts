@@ -27,7 +27,7 @@ export interface ComicChapter {
   unlockedDay: number;
 }
 
-export type Level = 1 | 2 | 3 | 4 | 5;
+export type Level = number;
 export type BaseStage = "abandoned" | "water" | "repair" | "training" | "complete";
 
 export interface DailyRecord {

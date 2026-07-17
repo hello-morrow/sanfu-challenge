@@ -63,10 +63,10 @@ export function useRecords() {
 
   const streak = streakDays();
 
-  const playerLevel: { level: Level; name: string; emoji: string } = (() => {
+  const playerLevel: { level: Level; name: string } = (() => {
     let l = LEVEL_THRESHOLDS[0];
     for (const t of LEVEL_THRESHOLDS) if (streak >= t.minStreak) l = t;
-    return { level: l.level, name: l.name, emoji: l.emoji };
+    return { level: l.level, name: l.name };
   })();
 
   const baseStage: { stage: BaseStage; name: string; emoji: string; desc: string } = (() => {

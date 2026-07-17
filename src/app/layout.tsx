@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
+import HeatOverlay from "@/components/HeatOverlay";
 
 export const metadata: Metadata = {
   title: "三伏天：40日生存挑战",
@@ -11,14 +12,15 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: "device-width", initialScale: 1, maximumScale: 1, userScalable: false,
-  themeColor: "#F7F1E8", viewportFit: "cover",
+  themeColor: "#F5E6CC", viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN" className="h-full">
-      <body className="min-h-full flex flex-col bg-base">
-        <main className="flex-1 pb-24 mx-auto w-full max-w-lg px-4 pt-6">
+      <body className="min-h-full flex flex-col bg-base relative">
+        <HeatOverlay />
+        <main className="flex-1 pb-24 mx-auto w-full max-w-lg px-4 pt-6 relative z-10">
           {children}
         </main>
         <BottomNav />

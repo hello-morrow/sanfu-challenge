@@ -112,11 +112,15 @@ export const BASE_STAGES: { stage: import("./types").BaseStage; fromDay: number;
   { stage: "complete",  fromDay: 40, name: "SANFU CAMP",   emoji: "🏆",  desc: "40天挑战达成！" },
 ];
 
-// ── Level System ──
+export type Level = number; // 1-40
+
+// ── Level System (LV 1-40, based on streak) ──
 export const LEVEL_THRESHOLDS = [
-  { level: 1 as const, minStreak: 0,  name: "新手生存者", emoji: "🧍" },
-  { level: 2 as const, minStreak: 7,  name: "适应者",     emoji: "💪" },
-  { level: 3 as const, minStreak: 14, name: "训练兵",     emoji: "🏃" },
-  { level: 4 as const, minStreak: 21, name: "战士",       emoji: "⚔️" },
-  { level: 5 as const, minStreak: 30, name: "SANFU大师",  emoji: "🔥" },
+  { level: 1,  minStreak: 0,  name: "新手幸存者" },
+  { level: 5,  minStreak: 3,  name: "适应者" },
+  { level: 10, minStreak: 7,  name: "训练兵" },
+  { level: 15, minStreak: 14, name: "战士" },
+  { level: 20, minStreak: 21, name: "精英" },
+  { level: 30, minStreak: 30, name: "SANFU大师" },
+  { level: 40, minStreak: 40, name: "传奇幸存者" },
 ];
